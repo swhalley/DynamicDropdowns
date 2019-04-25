@@ -24,7 +24,12 @@
     });
 
 
-    
+    /**
+     * Event Listener for a select drop down list. 
+     * When an option is selected it will remove it from other dropdowns that have the same value.
+     * It will not remove the value from a drop down if it is currently selected
+     * @param {Event} event 
+     */
     let removeSelectedChoiceFromOtherDropdowns = (event) => {
         let currentSelectedValues = selects.map( select => select.value ).filter( value => value);
 
@@ -35,7 +40,9 @@
             selectElement.childNodes.forEach( option => {
                 //hide the option using a css class if it is already chosen from another select
                 //but dont hide it if the option is selected on the current dropdown
-                option.classList.toggle( 'noDisplay', option.value !== selectElement.value && currentSelectedValues.some( value => value === option.value ));
+                option.classList.toggle( 'noDisplay', 
+                    option.value !== selectElement.value 
+                    && currentSelectedValues.some( value => value === option.value ));
             })
             
         });
